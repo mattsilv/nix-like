@@ -1,0 +1,61 @@
+{>layout/}
+{<content}
+
+    {#user_profile}
+        
+        <hr>
+        
+        <div class="row">
+            
+            <div class="col-md-6">
+                    <h1>{first_name} {last_name}</h1>
+                    <img class="thumbnail" src="https://graph.facebook.com/{facebook_id}/picture?height=250&amp;width=250", alt="">
+            </div>
+
+            <div class="col-md-6">
+                <div class="col-md-4"><h1>{age} Age</h1></div>
+                <div class="col-md-4"><h1>{gender} Gender</h1></div>
+                <div class="col-md-4"><h1>{review_count}</h1></div>
+                <div class="col-md-12">
+                    <h1>Spectrum</h1>
+                    <h4><i>(Hover over the colors)</i></h4>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-success"
+                             data-toggle="tooltip" title="protein ratio"
+                             style="width: {protein_ratio_avg}%">
+                            <span class="sr-only">{protein_ratio_avg}% Complete (success)</span>
+                        </div>
+                        <div class="progress-bar progress-bar-warning"
+                             data-toggle="tooltip" title="carb ratio"
+                             style="width: {carb_ratio_avg}%">
+                            <span class="sr-only">{carb_ratio_avg}% Complete (warning)</span>
+                        </div>
+                        <div class="progress-bar progress-bar-danger"
+                             data-toggle="tooltip" title="fat ratio"
+                             style="width: {fat_ratio_avg}%">
+                            <span class="sr-only">{fat_ratio_avg}% Complete (danger)</span>
+                        </div>
+                        <div class="progress-bar progress-bar-info"
+                             data-toggle="tooltip" title="fat ratio"
+                             style="width: {other_pct}%">
+                            <span class="sr-only">{other_pct}% Complete (danger)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="row">
+              <div class="col-xs-6 col-md-3">
+                <a href="#" class="thumbnail">
+                  <img data-src="holder.js/100%x180" alt="...">
+                </a>
+              </div>
+            </div>
+        </div>
+
+    {/user_profile}
+
+{/content}

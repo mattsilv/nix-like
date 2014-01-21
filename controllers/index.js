@@ -9,8 +9,8 @@ module.exports = {
             return res.redirect('/item')
         }
 
-        res.render('login/index',{
-            title: 'login',
+        res.render('index',{
+            title: 'Home',
             messages: req.flash('messages')
         });
     }

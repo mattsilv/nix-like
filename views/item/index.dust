@@ -42,9 +42,11 @@
         {/item}
     </div>
     
-    <div class="row">
-        <div class="col-lg-3 col-lg-offset-5">
-            You've Reviewed <strong>10</strong> products
+    {#user}
+        <div class="row">
+            <div class="col-lg-3 col-lg-offset-5">
+                You've Reviewed <strong>{review_count}</strong> products
+            </div>
         </div>
-    </div>
+    {/user}
 {/content}

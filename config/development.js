@@ -21,5 +21,7 @@ module.exports = {
             charset: 'utf8',
             port: 3306
         }
-    }
+    },
+    facebook: require('./local/facebook'),
+    appUrl: 'http://localhost:3000'
 };

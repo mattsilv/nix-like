@@ -23,5 +23,10 @@ module.exports = {
             charset: 'utf8',
             port: 3306
         }
-    }
+    },
+    facebook: {
+        appId: process.env.FACEBOOK_ID,
+        appSec: process.env.FACEBOOK_SEC
+    },
+    appUrl: process.env.APP_URL
 };

@@ -20,4 +20,6 @@ $(document).ready(function() {
 
     }
 
+    $('.progress-bar').tooltip()
+
 });

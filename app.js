@@ -3,6 +3,11 @@
  * Module dependencies.
  */
 
+
+global._     = require('underscore');
+global.async = require('async');
+
+
 var path    = require('path');
 var http    = require('http');
 var express = require('express');
@@ -28,6 +33,7 @@ Knex.knex = Knex.initialize(config.mysql);
 // Configure Login thru Passport
 var passport = require('passport');
 require('./lib/auth/local')(passport);
+require('./lib/auth/oAuth')(passport, config);
 require('./lib/auth/userSerialization')(passport);
 
 
@@ -78,6 +84,22 @@ if ('development' == app.get('env')) {
 app.get('/', require('./controllers').index);
 
 
+
+var itemCtrl        = require('./controllers/item');
+var sessionsCtrl    = require('./controllers/sessions');
+var usersCtrl       = require('./controllers/users');
+var isAuthenticated = require('./policies/isAuthenticated');
+
+app.get('/item', isAuthenticated, itemCtrl.index);
+app.post('/item', isAuthenticated, itemCtrl.rateProduct);
+
+
+app.get('/users/:id', isAuthenticated, usersCtrl.index);
+
+// Sessions
+app.all('/auth/logout', sessionsCtrl.logout);
+app.get('/auth/local',  sessionsCtrl.localLogin);
+
 app.post('/auth/local',
     passport.authenticate('local', {
         successRedirect: '/item',
@@ -86,23 +108,19 @@ app.post('/auth/local',
     })
 );
 
-app.all('/auth/logout', function (req, res) {
-    
-    req.flash('messages',{
-        type: 'success',
-        title: 'Bye',
-        text: 'Thanks for training us!'
-    });
+app.get('/auth/facebook',
+    passport.authenticate('facebook',{
+        scope: ['publish_stream', 'user_birthday', 'user_location', 
+                'user_likes', 'user_interests', 'email', 'publish_actions']
+    })
+);
 
-    req.logout();
-    res.redirect('/');
-});
-
-var itemCtrl        = require('./controllers/item');
-var isAuthenticated = require('./policies/isAuthenticated');
-
-app.get('/item', isAuthenticated, itemCtrl.index);
-app.post('/item', isAuthenticated, itemCtrl.rateProduct);
+app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', {
+        successRedirect: '/item',
+        failureRedirect: '/'
+    })
+);
 
 
 // Start Server

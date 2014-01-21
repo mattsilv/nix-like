@@ -20,6 +20,8 @@
     "mysql": "~2.0.1",
     "connect-flash": "~0.1.1",
     "request": "~2.33.0",
-    "express-validator": "~1.0.1"
+    "express-validator": "~1.0.1",
+    "async": "~0.2.9",
+    "underscore": "~1.5.2"
   }
 }

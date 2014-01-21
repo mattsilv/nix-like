@@ -25,7 +25,25 @@
             {#user}
                 <div class="header">
                     <ul class="nav nav-pills pull-right">
-                        <li><a href="/auth/logout" method="DELETE">Logout</a></li>
+                        <li>
+                            <a href="/item">Item</a>
+                        </li>
+                        <li>
+                            <a href="/users/{id}">
+                                {first_name}&nbsp;{last_name}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/auth/logout" method="DELETE">
+                                <i class="fa fa-sign-out fa-lg"></i>&nbsp;
+                                Logout
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/settings">
+                                <i class="fa fa-cog fa-lg"></i>
+                            </a>
+                        </li>
                     </ul>
                     <h3 class="text-muted">Nix Prediction Trainer</h3>
 
@@ -41,8 +59,9 @@
             {+content}{/content}
         </div>
         
-        <!-- <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> -->
+        
         <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js"></script>
         <script src="/javascripts/app.js"></script>
         <script src="/javascripts/index.js"></script>
