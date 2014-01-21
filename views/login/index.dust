@@ -1,0 +1,18 @@
+{>layout/}
+{<content}
+    <div class="row">
+        <div class="col-md-3 col-md-offset-4">
+            <form action="/auth/local" method="post" class="form">
+                <legend>Sign In</legend>
+                <div class="form-group">
+                    <input type="text" name="username" class="form-control" placeholder="username"/>
+                </div>
+                <div class="form-group">
+                    
+                    <input type="password" name="password" class="form-control" placeholder="password"/>
+                </div>
+                <button class="btn btn-primary btn-lg btn-block" type="submit" >Log In</button>
+            </form>
+        </div>
+    </div>
+{/content}
