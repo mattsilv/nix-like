@@ -110,10 +110,13 @@ app.post('/auth/local',
 
 app.get('/auth/facebook',
     passport.authenticate('facebook',{
-        scope: ['publish_stream', 'user_birthday', 'user_location', 
-                'user_likes', 'user_interests', 'email', 'publish_actions']
+        scope: ['user_birthday', 'user_location', 
+                'user_likes', 'user_interests', 'email']
     })
 );
+
+// publish_stream
+// publish_actions
 
 app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
