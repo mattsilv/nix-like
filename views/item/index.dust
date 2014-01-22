@@ -5,6 +5,7 @@
         <div class="col-md-6">
             {#item}
                 <img class="thumbnail" src="{secure_url}", alt="{api_id}">
+                <i style="color: #ddd">UPC: {upc} ID: {api_id}</i>
             {/item}
         </div>
         <div class="col-md-6">
