@@ -8,7 +8,7 @@ app.controller('ItemCtrl', ['$scope',
             'Healthy',
             'Indulgent'
         ];
-        $scope.mode = mode
+        $scope.mode = mode ? mode : $scope.modes[0];
     }
 ]);
 
