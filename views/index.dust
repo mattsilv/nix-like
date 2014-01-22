@@ -1,14 +1,21 @@
 {>layout/}
 {<content}
     <div class="row">
-        <div class="col-md-3 col-md-offset-4">
-            <a class="btn btn-primary btn-lg btn-block" href="/auth/facebook">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="jumbotron">
+                <h1>Grocery Predictor</h1>
+                <p>You will be shown a series of grocery foods. Please indicate which foods you would be likely to buy.  </p>
+                <p>We use facebook to facilitate easy sign-in, but we will never post to your facebook account.</p>
+                <p><a class="btn btn-primary btn-lg" href="/auth/facebook">
                 <i class="fa fa-facebook-square fa-lg"></i> &nbsp;
-                Facebook
-            </a>
+                login with facebook
+            </a></p>
+            </div>
+            
             <a href="/auth/local">
                 Manual Login
             </a>
         </div>
+        
     </div>
 {/content}
