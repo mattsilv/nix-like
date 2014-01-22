@@ -40,7 +40,7 @@ module.exports = {
         var regExp = /^(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$/;
         req.assert('upc',   'must be an intenger').notNull().isInt();
         req.assert('liked', 'must be truthy').notNull().isInt().isIn(['1','0']);
-        req.assert('mode',  'either 1:Indulgent or 0:Healthy').notNull().isIn(['1','0']);
+        // req.assert('mode',  'either 1:Indulgent or 0:Healthy').notNull().isIn(['1','0']);
 
         if (req.param('geoloc')) {
             // req.assert('geoloc','must match latitude,longitude') // .is(regExp);
@@ -99,7 +99,7 @@ module.exports = {
                     .insert({
                         upc:    req.param('upc'),
                         liked:  req.param('liked'),
-                        mode:   mode,
+                        // mode:   mode,
                         age:    req.user.age,
                         gender: req.user.gender,
                         app_id: 'NIX_PREDICTION',

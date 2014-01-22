@@ -17,24 +17,27 @@
                         <h5>{brand_name}</h5>
                     </div>
 
-                    <div class="form-group" class="col-md-4">
+                    {!<div class="form-group" class="col-md-4">
                         <label>Mode</label>&nbsp;
                         <select class="form-control" name="mode" data-ng-model="mode" data-ng-options="mode as mode for mode in modes">
                         </select>
-                    </div>
+                    </div>!}
                     
-                    <div class="col-md-12" data-mode="mode" data-sentence></div>
+                    {!<div class="col-md-12" data-mode="mode" data-sentence></div>!}
+                    <div class="col-md-12">
+                        <p>Would you buy this item?</p>
+                    </div>
                     <div class="col-md-12">
                         <input type="hidden" name="upc" value="{upc}"/>
                         <input type="hidden" name="geoloc" value="" id="geoloc"/>
                         <button class="btn btn-primary" name="liked" value="1">
                             <i class="fa fa-thumbs-up"></i> &nbsp;
-                            Like
+                            Yes
                         </button>
                         &nbsp;
                         <button class="btn btn-danger" name="liked" value="0">
                             <i class="fa fa-thumbs-down"></i> &nbsp;
-                            Dislike
+                            No
                         </button>
                     </div>
                 </form>
@@ -51,8 +54,8 @@
         </div>
     {/user}
 
-    <script type="text/javascript">
+    {!<script type="text/javascript">
         var mode = '{mode}';
-    </script>
+    </script>!}
 
 {/content}

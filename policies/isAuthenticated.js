@@ -12,7 +12,7 @@ module.exports = function (req, res, next) {
         
         var message = {
             type:  'warning',
-            title: 'Woe There!',
+            title: 'Whoa There!',
             text:  'You must be logged '+
                    'in to view this page.'
         };
