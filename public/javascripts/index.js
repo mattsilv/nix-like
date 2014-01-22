@@ -2,11 +2,11 @@ $(document).ready(function() {
 
     if ('geolocation' in navigator && window.location.pathname === '/item') {
         
-        var form = $('input, button, select');
+        // var form = $('input, button, select');
         
         // Disable form until user
         // allows access to their location
-        form.attr('disabled', 'disabled')
+        // form.attr('disabled', 'disabled')
         // Ask for location
         navigator.geolocation.getCurrentPosition(function(position) {
 
@@ -15,7 +15,7 @@ $(document).ready(function() {
             $('#geoloc').val(geoloc);
 
             // unlock form
-            form.removeAttr('disabled');
+            // form.removeAttr('disabled');
         });
 
     }

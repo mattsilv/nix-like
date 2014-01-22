@@ -6,6 +6,9 @@
                 <i class="fa fa-facebook-square fa-lg"></i> &nbsp;
                 Facebook
             </a>
+            <a href="/auth/local">
+                Manual Login
+            </a>
         </div>
     </div>
 {/content}
