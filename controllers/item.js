@@ -30,7 +30,8 @@ module.exports = {
             // console.log(req.flash('messages'))
             res.render('item/index', { 
                 messages: req.flash('messages'),
-                item: data[0]
+                item: data[0],
+                mode: req.session.mode
             });
 
         });
@@ -40,7 +41,10 @@ module.exports = {
         req.assert('upc',   'must be an intenger').notNull().isInt();
         req.assert('liked', 'must be truthy').notNull().isInt().isIn(['1','0']);
         req.assert('mode',  'either 1:Indulgent or 0:Healthy').notNull().isIn(['1','0']);
-        req.assert('geoloc','must match latitude,longitude').notNull().is(regExp);
+
+        if (req.param('geoloc')) {
+            req.assert('geoloc','must match latitude,longitude').is(regExp);
+        }
 
         // console.log(req.param('mode'))
         var validationErrors = req.validationErrors(true);
@@ -58,6 +62,9 @@ module.exports = {
         }
 
         var mode = ['Healthy','Indulgent'][Number(req.param('mode'))];
+
+        req.session.mode = mode;
+        req.session.save();
 
         knex('predict_items')
             .select('*')

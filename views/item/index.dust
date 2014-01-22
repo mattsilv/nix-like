@@ -49,4 +49,11 @@
             </div>
         </div>
     {/user}
+
+    {#mode}
+        <script type="text/javascript">
+            var mode = '{mode}';
+        </script>
+    {/mode}
+
 {/content}
