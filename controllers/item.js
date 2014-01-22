@@ -43,7 +43,7 @@ module.exports = {
         req.assert('mode',  'either 1:Indulgent or 0:Healthy').notNull().isIn(['1','0']);
 
         if (req.param('geoloc')) {
-            req.assert('geoloc','must match latitude,longitude').is(regExp);
+            // req.assert('geoloc','must match latitude,longitude') // .is(regExp);
         }
 
         // console.log(req.param('mode'))
