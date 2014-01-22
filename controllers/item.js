@@ -1,5 +1,9 @@
 var knex = require('knex').knex;
 
+var infOrNaN = function(v){
+    return v === Infinity || isNaN(v);
+};
+
 module.exports = {
     index: function (req, res, next) {
         knex.raw(
@@ -20,6 +24,7 @@ module.exports = {
             'where a.tag_id = 1 '+
             'and a.deleted != 1 '+
             'and a.watermarked = 1 '+
+            // 'and a.upc = 678963100206 '+
             'order by rand() '+
             'limit 1'
         ).exec(function (err, data){
@@ -98,6 +103,7 @@ module.exports = {
                 var protein_ratio = (i.protein / i.serving_weight);
                 var carb_ratio = (i.carbs / i.serving_weight);
                 var fat_ratio = (i.fat / i.serving_weight);
+                // console.log(carb_ratio, protein_ratio, fat_ratio)
                 knex('predict_training')
                     .insert({
                         upc:    req.param('upc'),
@@ -109,9 +115,9 @@ module.exports = {
                         app_user_id: req.user.id,
                         // geoloc: req.param('geoloc'),
                         ip_address:   ip_address,
-                        protein_ratio: isNaN(protein_ratio) ? null : protein_ratio,
-                        carb_ratio: isNaN(carb_ratio) ? null : carb_ratio,
-                        fat_ratio: isNaN(fat_ratio) ? null : fat_ratio,
+                        protein_ratio: infOrNaN(protein_ratio) ? null : protein_ratio,
+                        carb_ratio: infOrNaN(carb_ratio) ? null : carb_ratio,
+                        fat_ratio: infOrNaN(fat_ratio) ? null : fat_ratio,
                         createdAt: new Date()
                     }).exec(function(err){
 
