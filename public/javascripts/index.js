@@ -8,15 +8,15 @@ $(document).ready(function() {
         // allows access to their location
         // form.attr('disabled', 'disabled')
         // Ask for location
-        navigator.geolocation.getCurrentPosition(function(position) {
+        // navigator.geolocation.getCurrentPosition(function(position) {
 
-            var geoloc = [position.coords.latitude, position.coords.longitude].join(',');
+        //     var geoloc = [position.coords.latitude, position.coords.longitude].join(',');
 
-            $('#geoloc').val(geoloc);
+        //     $('#geoloc').val(geoloc);
 
-            // unlock form
-            // form.removeAttr('disabled');
-        });
+        //     // unlock form
+        //     // form.removeAttr('disabled');
+        // });
 
     }
 

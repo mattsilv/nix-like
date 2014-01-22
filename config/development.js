@@ -11,17 +11,7 @@ module.exports = {
     session: {
         secret: 'ZSAgPSByZXF1aXJlKCdqYWRlJyk7CnZhciBhZGFyby'
     },
-    mysql:{
-        client: 'mysql',
-        connection: {
-            host: 'localhost',
-            user: 'root',
-            password: void 0,
-            database: 'nutritionix-api',
-            charset: 'utf8',
-            port: 3306
-        }
-    },
+    mysql:    require('./local/testingdb'),
     facebook: require('./local/facebook'),
-    appUrl: 'http://localhost:3000'
+    appUrl:   'http://localhost:3000'
 };

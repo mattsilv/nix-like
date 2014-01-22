@@ -95,6 +95,9 @@ module.exports = {
                 var i = data[0];
                 var ip_address = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 
+                var protein_ratio = (i.protein / i.serving_weight);
+                var carb_ratio = (i.carbs / i.serving_weight);
+                var fat_ratio = (i.fat / i.serving_weight);
                 knex('predict_training')
                     .insert({
                         upc:    req.param('upc'),
@@ -104,11 +107,11 @@ module.exports = {
                         gender: req.user.gender,
                         app_id: 'NIX_PREDICTION',
                         app_user_id: req.user.id,
-                        geoloc: req.param('geoloc'),
+                        // geoloc: req.param('geoloc'),
                         ip_address:   ip_address,
-                        protein_ratio:(i.protein / i.serving_weight),
-                        carb_ratio:   (i.carbs / i.serving_weight),
-                        fat_ratio:    (i.fat / i.serving_weight),
+                        protein_ratio: isNaN(protein_ratio) ? null : protein_ratio,
+                        carb_ratio: isNaN(carb_ratio) ? null : carb_ratio,
+                        fat_ratio: isNaN(fat_ratio) ? null : fat_ratio,
                         createdAt: new Date()
                     }).exec(function(err){
 
