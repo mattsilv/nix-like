@@ -26,7 +26,7 @@ module.exports = {
                     'where a.tag_id = 1 '+
                     'and a.deleted != 1 '+
                     'and a.watermarked = 1 '+
-                    'and a.upc NOT IN (SELECT DISTINCT upc FROM predict_training WHERE app_user_id = '+req.user.id+') '+
+                    'and a.upc NOT IN (SELECT DISTINCT upc FROM predict_training p WHERE p.app_user_id = '+req.user.id+') '+
                     'order by rand() '+
                     'limit 1'
                 ).exec(function (err, data){
@@ -53,9 +53,9 @@ module.exports = {
                     'and p.liked = 1 '+
                     'and a.deleted != 1 '+
                     'and a.watermarked = 1 '+
-                    'and a.upc NOT IN (SELECT DISTINCT upc FROM predict_training WHERE app_user_id = '+req.user.id+') '+
-                    'order by like_count desc '+
+                    'and a.upc NOT IN (SELECT DISTINCT upc FROM predict_training p WHERE p.app_user_id = '+req.user.id+') '+
                     'group by p.upc '+
+                    'order by like_count desc '+
                     'limit 6'
                 ).exec(function (err, data){
                     
