@@ -26,6 +26,7 @@ module.exports = {
                     'where a.tag_id = 1 '+
                     'and a.deleted != 1 '+
                     'and a.watermarked = 1 '+
+                    'and a.upc NOT IN (SELECT DISTINCT upc FROM predict_training WHERE app_user_id = '+req.user.id+') '+
                     'order by rand() '+
                     'limit 1'
                 ).exec(function (err, data){
@@ -42,7 +43,8 @@ module.exports = {
                         'p.*,'+
                         'a.secure_url,'+
                         'pi.item_name,'+
-                        'pi.brand_name '+
+                        'pi.brand_name,'+
+                        'count(*) as like_count '+
                     'from predict_training p '+
                     'join assets a on a.upc = p.upc '+
                     'join predict_items pi on pi.upc = p.upc '+
@@ -51,8 +53,9 @@ module.exports = {
                     'and p.liked = 1 '+
                     'and a.deleted != 1 '+
                     'and a.watermarked = 1 '+
-                    'and p.app_user_id != '+req.user.id+' '+
-                    'order by rand() '+
+                    'and a.upc NOT IN (SELECT DISTINCT upc FROM predict_training WHERE app_user_id = '+req.user.id+') '+
+                    'order by like_count desc '+
+                    'group by p.upc '+
                     'limit 6'
                 ).exec(function (err, data){
                     
