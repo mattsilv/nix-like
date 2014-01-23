@@ -11,11 +11,27 @@
                 login with facebook
             </a></p>
             </div>
-            
-            <a href="/auth/local">
-                Manual Login
-            </a>
         </div>
         
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <center>
+                <h3>Recently Liked Items:</h3>
+            </center>
+        </div>
+    </div>
+    <div class="row">
+            {#items}
+                <div class="col-xs-2">
+                    <a href="/item/{item_id}" class="thumbnail">
+                        <img src="{secure_url}{~n}" alt="{upc}">
+                    </a>
+                    <center>
+                        <strong>{item_name}</strong>
+                    </center>
+                </div>
+            {/items}
     </div>
 {/content}
