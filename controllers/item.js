@@ -6,40 +6,78 @@ var infOrNaN = function(v){
 
 module.exports = {
     index: function (req, res, next) {
-        knex.raw(
-            'select '+
-                'a.api_id,'+
-                'a.upc,'+
-                'a.secure_url,'+
-                'i.serving_weight,'+
-                'i.serving_weight_uom,'+
-                'i.calories,'+
-                'i.fat,'+
-                'i.carbs,'+
-                'i.protein,'+
-                'i.item_name,'+
-                'i.brand_name '+
-            'from assets a '+
-            'join predict_items i on i.upc = a.upc '+
-            'where a.tag_id = 1 '+
-            'and a.deleted != 1 '+
-            'and a.watermarked = 1 '+
-            // 'and a.upc = 678963100206 '+
-            'order by rand() '+
-            'limit 1'
-        ).exec(function (err, data){
+        async.parallel({
+            item: function (finish) {
+                knex.raw(
+                    'select '+
+                        'a.api_id,'+
+                        'a.upc,'+
+                        'a.secure_url,'+
+                        'i.serving_weight,'+
+                        'i.serving_weight_uom,'+
+                        'i.calories,'+
+                        'i.fat,'+
+                        'i.carbs,'+
+                        'i.protein,'+
+                        'i.item_name,'+
+                        'i.brand_name '+
+                    'from assets a '+
+                    'join predict_items i on i.upc = a.upc '+
+                    'where a.tag_id = 1 '+
+                    'and a.deleted != 1 '+
+                    'and a.watermarked = 1 '+
+                    'order by rand() '+
+                    'limit 1'
+                ).exec(function (err, data){
+                    if (err) {
+                        return finish(err);
+                    }
+
+                    return finish(null, data[0])
+                });
+            },
+            recs: function (finish) {
+                knex.raw(
+                    'select '+
+                        'p.*,'+
+                        'a.secure_url,'+
+                        'pi.item_name,'+
+                        'pi.brand_name '+
+                    'from predict_training p '+
+                    'join assets a on a.upc = p.upc '+
+                    'join predict_items pi on pi.upc = p.upc '+
+                    'where p.gender = "male" '+
+                    'and a.tag_id = 1 '+
+                    'and p.liked = 1 '+
+                    'and a.deleted != 1 '+
+                    'and a.watermarked = 1 '+
+                    'and p.app_user_id != '+req.user.id+' '+
+                    'order by rand() '+
+                    'limit 6'
+                ).exec(function (err, data){
+                    
+                    if (err) {
+                        return finish(err);
+                    }
+
+                    return finish(null , data)
+
+                });
+            }
+        }, function (err, results) {
+            
             if (err) {
                 return next(err);
             }
 
-            // console.log(req.flash('messages'))
             res.render('item/index', { 
                 messages: req.flash('messages'),
-                item: data[0],
+                item: results.item[0],
+                recs: results.recs[0],
                 mode: req.session.mode
             });
-
         });
+        
     },
     rateProduct: function (req, res, next) {
         var regExp = /^(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$/;

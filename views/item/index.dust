@@ -40,19 +40,36 @@
                             No
                         </button>
                     </div>
+                    {#user}
+                        <div class="col-md-6" style="margin-top:50px">
+                            You've Reviewed <strong>{review_count}</strong> products
+                        </div>
+                    {/user}
                 </form>
 
             </div>
         {/item}
     </div>
-    
-    {#user}
-        <div class="row">
-            <div class="col-lg-3 col-lg-offset-5">
-                You've Reviewed <strong>{review_count}</strong> products
-            </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <center>
+                <h3>Products you may like:</h3>
+            </center>
         </div>
-    {/user}
+    </div>
+    <div class="row">
+            {#recs}
+                <div class="col-xs-2">
+                    <a href="" class="thumbnail">
+                        <img src="{secure_url}{~n}" alt="{upc}">
+                    </a>
+                    <center>
+                        <strong>{item_name}</strong>
+                    </center>
+                </div>
+            {/recs}
+    </div>
 
     {!<script type="text/javascript">
         var mode = '{mode}';
