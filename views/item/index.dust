@@ -61,7 +61,7 @@
     <div class="row">
             {#recs}
                 <div class="col-xs-2">
-                    <a href="" class="thumbnail">
+                    <a href="/item/{item_id}" class="thumbnail">
                         <img src="{secure_url}{~n}" alt="{upc}">
                     </a>
                     <center>

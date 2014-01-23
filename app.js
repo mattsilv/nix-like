@@ -91,6 +91,7 @@ var usersCtrl       = require('./controllers/users');
 var isAuthenticated = require('./policies/isAuthenticated');
 
 app.get('/item', isAuthenticated, itemCtrl.index);
+app.get('/item/:item_id', isAuthenticated, itemCtrl.index);
 app.post('/item', isAuthenticated, itemCtrl.rateProduct);
 
 

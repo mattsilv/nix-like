@@ -8,6 +8,12 @@ module.exports = {
     index: function (req, res, next) {
         async.parallel({
             item: function (finish) {
+                var item_id = req.param('item_id') || '';
+                var andQuery = '';
+                if (item_id) {
+                    andQuery = 'and i.id = '+'\''+item_id+'\''+' ';
+                }
+
                 knex.raw(
                     'select '+
                         'a.api_id,'+
@@ -20,12 +26,13 @@ module.exports = {
                         'i.carbs,'+
                         'i.protein,'+
                         'i.item_name,'+
-                        'i.brand_name '+
+                        'i.brand_name,'+
+                        'i.id as item_id '+
                     'from assets a '+
                     'join predict_items i on i.upc = a.upc '+
                     'where a.tag_id = 1 '+
                     'and a.deleted != 1 '+
-                    'and a.watermarked = 1 '+
+                    'and a.watermarked = 1 '+andQuery+
                     'and a.upc NOT IN (SELECT DISTINCT upc FROM predict_training p WHERE p.app_user_id = '+req.user.id+') '+
                     'order by rand() '+
                     'limit 1'
@@ -44,6 +51,7 @@ module.exports = {
                         'a.secure_url,'+
                         'pi.item_name,'+
                         'pi.brand_name,'+
+                        'pi.id as item_id,'+
                         'count(*) as like_count '+
                     'from predict_training p '+
                     'join assets a on a.upc = p.upc '+
