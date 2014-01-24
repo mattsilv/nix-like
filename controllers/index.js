@@ -30,6 +30,7 @@ module.exports = {
             'and a.watermarked = 1 '+
             'group by p.upc '+
             'having like_count > 1 '+
+            'order by RAND() '+
             'limit 6'
         ).exec(function (err, data){
             

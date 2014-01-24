@@ -63,7 +63,8 @@ module.exports = {
                     'and a.watermarked = 1 '+
                     'and a.upc NOT IN (SELECT DISTINCT upc FROM predict_training p WHERE p.app_user_id = '+req.user.id+') '+
                     'group by p.upc '+
-                    'order by like_count desc '+
+                    'having like_count > 1 '+
+                    'order by RAND() '+
                     'limit 6'
                 ).exec(function (err, data){
                     
