@@ -21,7 +21,7 @@
     </head>
     <body>
         <div class="container">
-            
+
             {#user}
                 <div class="header">
                     <ul class="nav nav-pills pull-right">
@@ -45,7 +45,7 @@
                             </a>
                         </li>
                     </ul>
-                    <h3 class="text-muted">Nix Prediction Trainer</h3>
+                    <h4 class="text-muted">Nix Prediction Trainer</h4>
 
                 </div>
             {/user}
@@ -55,16 +55,16 @@
                 <div class="alert alert-{type}{~n}">
                     <strong>{title}</strong> {text}{~n}
                 </div>
-            {/messages}            
+            {/messages}
             {+content}{/content}
         </div>
-        
-        
+
+
         <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
         <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js"></script>
         <script src="/javascripts/app.js"></script>
         <script src="/javascripts/index.js"></script>
     </body>
-    
+
 </html>
