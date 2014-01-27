@@ -29,7 +29,7 @@ module.exports = {
             'and a.deleted != 1 '+
             'and a.watermarked = 1 '+
             'group by p.upc '+
-            'having like_count > 1 '+
+            'having like_count > 0 '+
             'order by RAND() '+
             'limit 6'
         ).exec(function (err, data){

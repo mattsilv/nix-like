@@ -30,6 +30,7 @@ module.exports = {
                         'i.id as item_id '+
                     'from assets a '+
                     'join predict_items i on i.upc = a.upc '+
+                    'join predict_items pi on pi.upc = a.upc '+
                     'where a.tag_id = 1 '+
                     'and a.deleted != 1 '+
                     'and a.watermarked = 1 '+andQuery+
@@ -63,7 +64,7 @@ module.exports = {
                     'and a.watermarked = 1 '+
                     'and a.upc NOT IN (SELECT DISTINCT upc FROM predict_training p WHERE p.app_user_id = '+req.user.id+') '+
                     'group by p.upc '+
-                    'having like_count > 1 '+
+                    'having like_count > 0 '+
                     'order by RAND() '+
                     'limit 6'
                 ).exec(function (err, data){
